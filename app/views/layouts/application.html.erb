@@ -6,9 +6,36 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
+	  <nav>
+	    <div class="nav-wrapper">
+	      <a href="/" class="brand-logo">SNS</a>
+	      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+	      <ul class="right hide-on-med-and-down">
+	        <li><a href="/posts">Posts</a></li>
+	        <% if user_signed_in? %>
+	        	<li><%= current_user.name %></li>
+	        	<li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+	        <%else%>
+	        <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li>
+	        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+	        <%end%>
+	      </ul>
+	      <ul class="side-nav" id="mobile-demo">
+	        <li><a href="/posts">Posts</a></li>
+	        <% if user_signed_in? %>
+	        	<li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+	        <%else%>
+	        <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li>
+	        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+	        <%end%>
+	      </ul>
+	    </div>
+	  </nav>
     <%= yield %>
   </body>
 </html>
