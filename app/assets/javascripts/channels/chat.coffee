@@ -6,7 +6,8 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+  	console.log("Received : #{data.message}")
     # Called when there's incoming data on the websocket for this channel
 
-    speak: (message) ->
-    	@perform "speak", message: message
+  speak: (message) ->
+   	@perform "speak", message: message
